@@ -9,7 +9,7 @@
     "clean-dist": "del-cli ./dist",
     "clean-docs": "del-cli ./docs",
     "build-dist": "npm run-script clean-dist && tsc",
-    "build-docs": "npm run-script clean-docs && typedoc --out ./docs/ --excludePrivate --exclude \"**/*/_*.ts\" ./src/",
+    "build-docs": "npm run-script clean-docs && typedoc --theme minimal --out ./docs/ --excludePrivate --mode modules --exclude \"**/*/_*.ts\" ./src/",
     "build-package": "npm run-script build-dist && npm pack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
