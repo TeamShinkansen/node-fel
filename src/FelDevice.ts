@@ -1,5 +1,5 @@
 import * as usb from "usb"
-import * as USBPromises from "./UsbPromises"
+import * as USBPromises from "./_UsbPromises"
 import { Fel } from "./Fel"
 import { FelStandardRequest } from "./FelStandardRequest";
 import { AwUsbRequest } from "./AwUsbRequest";

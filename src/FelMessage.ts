@@ -1,6 +1,6 @@
 import { FelStandardRequest } from "./FelStandardRequest"
 import { FelStatusResponse } from "./FelStatusResponse"
-import * as NumberChecks from "./NumberChecks"
+import * as NumberChecks from "./_NumberChecks"
 
 /**
  * Class to represent a message to a FEL device.

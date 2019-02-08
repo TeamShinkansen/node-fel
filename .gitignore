@@ -62,5 +62,5 @@ typings/
 
 
 /dist/
-/fes1.bin
-/uboot.bin
+fes1.bin
+uboot.bin

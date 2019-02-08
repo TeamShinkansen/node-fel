@@ -5,7 +5,17 @@
     "tasks": [
       {
         "type": "npm",
-        "script": "build",
+        "script": "build-dist",
+        "problemMatcher": []
+      },
+      {
+        "type": "npm",
+        "script": "build-docs",
+        "problemMatcher": []
+      },
+      {
+        "type": "npm",
+        "script": "build-package",
         "problemMatcher": []
       },
       {
@@ -22,11 +32,6 @@
         "problemMatcher": [
           "$tsc-watch"
         ]
-      },
-      {
-        "type": "npm",
-        "script": "build-docs",
-        "problemMatcher": []
       }
     ]
 }

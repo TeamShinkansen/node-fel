@@ -1,5 +1,5 @@
 
-import * as NumberChecks from "./NumberChecks"
+import * as NumberChecks from "./_NumberChecks"
 
 /**
  * Class to represent a FEL status response.

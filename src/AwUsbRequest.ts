@@ -1,5 +1,5 @@
 import { FelParseError } from "./FelParseError";
-import * as NumberChecks from "./NumberChecks"
+import * as NumberChecks from "./_NumberChecks"
 /**
  * Class to represent an Allwinner USB request for a device in FEL mode.
  */

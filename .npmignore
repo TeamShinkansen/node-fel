@@ -1,0 +1,7 @@
+/docs
+/src
+/tsconfig.json
+/.gitignore
+/*.tgz
+/.vscode
+/dist/tests/
