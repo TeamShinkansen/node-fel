@@ -1,0 +1,23 @@
+{
+  "name": "fel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "build-docs": "typedoc --out ./docs/ ./src/",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node ./postinstall.js"
+  },
+  "author": "Daniel Radtke",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "tslint": "^5.12.1",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "@types/usb": "^1.5.1",
+    "usb": "^1.5.0"
+  }
+}
