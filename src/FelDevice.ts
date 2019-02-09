@@ -10,6 +10,7 @@ import { FelMessage } from "./FelMessage";
 import { FelConstants } from "./FelConstants";
 import { FelStatusResponse } from "./FelStatusResponse";
 import { AwVerifyDeviceResponse } from "./AwVerifyDeviceResponse";
+import { write } from "fs-extra";
 
 /**
  * Class to represent a connected USB device in FEL mode.
@@ -39,6 +40,9 @@ export class FelDevice {
   /** Uboot command offset */
   private commandOffset: number = 0
 
+  /** If the device is open */
+  public isOpen: boolean = false
+
   /**
    * Constructs a new FEL device.
    * @param device 
@@ -56,22 +60,28 @@ export class FelDevice {
   /**
    * Opens the FEL device. When you are finished communicating with the device, you should call the close() method.
    */
-  public async open(): Promise<void> {
+  public async open(force: boolean = false): Promise<void> {
+    if (this.isOpen === true && force === false) return
     this.device.open()
     this.iface.claim()
+    this.isOpen = true
+    
+    return //TODO: fix device verify
 
     console.log("Trying to verify device")
-    // var verification: VerifyDeviceResponse = await this.verifyDevice()
+    var verification: AwVerifyDeviceResponse = await this.verifyDevice()
 
-    // if (verification.board != 0x00166700) {
-    //   throw new FelError(`Invalid board ID: ${verification.board}`)
-    // }
+    if (verification.board != 0x00166700) {
+      throw new FelError(`Invalid board ID: ${verification.board}`)
+    }
   }
 
   /**
    * Closes the FEL device
    */
-  public async close(): Promise<void> {
+  public async close(force: boolean = false): Promise<void> {
+    if (this.isOpen === false && force === false) return
+    this.isOpen = false
     await USBPromises.DevicePromises.reset(this.device)
     await USBPromises.InterfacePromises.release(this.iface, true)
     this.device.close()
@@ -239,7 +249,7 @@ export class FelDevice {
    * @param address The address to write to
    * @param buffer The data to write to memory
    */
-  public async writeDeviceMemory(address: number, buffer: Buffer, progressCallback?: (bytesTransferred: number, totalBytes: number, address: number)=>void): Promise<void> {
+  public async writeDeviceMemory(address: number, buffer: Buffer, progressCallback?: FelDevice.ProgressCallback): Promise<void> {
     if ( address >= FelConstants.DRAM_BASE) {
       await this.initializeDRAM()
     }
@@ -268,7 +278,7 @@ export class FelDevice {
       pos += buf.length
 
       if (typeof(progressCallback) == "function") {
-        progressCallback(pos, buffer.length, address)
+        progressCallback(new FelDevice.ProgressCallback.ProgressInformation(pos, buffer.length, address, FelDevice.ProgressCallback.ProgressType.getMemoryType(address + pos, FelDevice.ProgressCallback.ReadingWriting.WRITE)))
       }
     }
   }
@@ -279,7 +289,7 @@ export class FelDevice {
    * @param length The length of data to read
    * @returns A Buffer representing the data at the given address of the given length
    */
-  public async readDeviceMemory(address: number, length: number, progressCallback?: (bytesTransferred: number, totalBytes: number, address: number)=>void): Promise<Buffer> {
+  public async readDeviceMemory(address: number, length: number, progressCallback?: FelDevice.ProgressCallback): Promise<Buffer> {
     if (address > FelConstants.DRAM_BASE) {
       await this.initializeDRAM()
     }
@@ -307,7 +317,7 @@ export class FelDevice {
       address += l
 
       if (typeof(progressCallback) == "function") {
-        progressCallback(initialLength - length, initialLength, initialAddress)
+        progressCallback(new FelDevice.ProgressCallback.ProgressInformation(initialLength - length, initialLength, initialAddress, FelDevice.ProgressCallback.ProgressType.getMemoryType(address, FelDevice.ProgressCallback.ReadingWriting.READ)))
       }
     }
 
@@ -315,13 +325,50 @@ export class FelDevice {
   }
 
   /**
-   * Reads the device NAND memory
+   * Writes to the device NAND
+   */
+  public async writeDeviceFlash(address: number, buffer: Buffer, progressCallback?: FelDevice.ProgressCallback): Promise<void> {
+    var length: number = buffer.length
+    var pos: number = 0
+
+    const initialAddress: number = address
+
+    if ((address % FelConstants.SECTOR_SIZE) != 0) {
+      throw new FelError(`Invalid flash address: 0x${address.toString(16).toUpperCase()}`)
+    }
+
+    if ((length % FelConstants.SECTOR_SIZE) != 0) {
+      throw new FelError(`Invalid flash length: 0x${length.toString(16).toUpperCase()}`)
+    }
+
+    while (length > 0) {
+      var writeLength: number = Math.min(length, FelConstants.TRANSFER_MAX_SIZE / 8)
+      var bufferSlice = buffer.slice(pos, pos + writeLength)
+      
+      await this.writeDeviceMemory(FelConstants.TRANSFER_BASE_M, bufferSlice, function(information: FelDevice.ProgressCallback.ProgressInformation) {
+        if (typeof(progressCallback) == "function") {
+          progressCallback(new FelDevice.ProgressCallback.ProgressInformation(pos + information.bytesTransferred, buffer.length, initialAddress, FelDevice.ProgressCallback.ProgressType.getNandType(initialAddress + pos + information.bytesTransferred, FelDevice.ProgressCallback.ReadingWriting.WRITE)))
+        }
+      })
+      
+      var command = `sunxi_flash phy_write ${FelConstants.TRANSFER_BASE_M.toString(16)} ${(address / FelConstants.SECTOR_SIZE).toString(16)} ${(Math.floor(writeLength / FelConstants.SECTOR_SIZE)).toString(16)};${FelConstants.FASTBOOT}`
+      await this.runUbootCommand(command, false, progressCallback)
+
+      pos += writeLength
+      address += writeLength
+      length -= writeLength
+    }
+  }
+
+  /**
+   * Reads froms the device NAND
    * @param address 
    * @param length 
    */
-  public async readDeviceFlash(address: number, length: number, progressCallback?: (bytesTransferred: number, totalBytes: number, address: number)=>void): Promise<Buffer> {
+  public async readDeviceFlash(address: number, length: number, progressCallback?: FelDevice.ProgressCallback): Promise<Buffer> {
     var result: Buffer[] = []
-    const inputLength: number = length
+    const initialLength: number = length
+    const initialAddress = address
     
     if ((address % FelConstants.SECTOR_SIZE) != 0) {
       throw new FelError(`Invalid flash address: 0x${address.toString(16).toUpperCase()}`)
@@ -334,9 +381,13 @@ export class FelDevice {
     while (length > 0) {
       const requestLength: number = Math.min(length, FelConstants.TRANSFER_MAX_SIZE)
       const command = `sunxi_flash phy_read ${FelConstants.TRANSFER_BASE_M.toString(16)} ${(address / FelConstants.SECTOR_SIZE).toString(16)} ${(Math.floor(requestLength / FelConstants.SECTOR_SIZE)).toString(16)};${FelConstants.FASTBOOT}`
-      await this.runUbootCmd(command, false, progressCallback)
+      await this.runUbootCommand(command, false, progressCallback)
       await new Promise((resolve) => setTimeout(resolve, 500))
-      const buf = await this.readDeviceMemory(FelConstants.TRANSFER_BASE_M + address % FelConstants.SECTOR_SIZE, requestLength, progressCallback)
+      const buf = await this.readDeviceMemory(FelConstants.TRANSFER_BASE_M + address % FelConstants.SECTOR_SIZE, requestLength, function(information: FelDevice.ProgressCallback.ProgressInformation) {
+        if (typeof(progressCallback) == "function") {
+          progressCallback(new FelDevice.ProgressCallback.ProgressInformation((address - initialAddress) + information.bytesTransferred, initialLength, initialAddress, FelDevice.ProgressCallback.ProgressType.getNandType(address + information.bytesTransferred, FelDevice.ProgressCallback.ReadingWriting.READ)))
+        }
+      })
       
       result.push(buf)
       address += buf.length
@@ -351,7 +402,7 @@ export class FelDevice {
    * @param command The uboot command to run
    * @param noReturn Whether or not to check for FEL connectivity afterward
    */
-  public async runUbootCmd(command: string, noReturn: boolean, progressCallback?: (bytesTransferred: number, totalBytes: number, address: number)=>void): Promise<void> {
+  public async runUbootCommand(command: string, noReturn: boolean, progressCallback?: FelDevice.ProgressCallback): Promise<void> {
     if (this.commandOffset <= 0) {
       throw new TypeError("Invalid uboot binary, boot command not found")
     }
@@ -459,6 +510,99 @@ export class FelDevice {
       if (ubootBin.slice(i, i + prefix.length).compare(prefix) === 0) {
         this.commandOffset = i + prefix.length
         break
+      }
+    }
+  }
+}
+export namespace FelDevice {
+  /**
+   * A callback that receives progress information about the current transfer
+   * @param bytesTransferred The number of bytes transferred
+   * @param totalBytes The total number of bytes for this transfer
+   * @param address The starting address for this transfer
+   */
+  export interface ProgressCallback {
+    (information: ProgressCallback.ProgressInformation): void
+  }
+  export namespace ProgressCallback {
+    export class ProgressInformation {
+      public bytesTransferred: number
+      public totalBytes: number
+      public address: number
+      public type: ProgressType | undefined
+
+      constructor(bytesTransferred: number, totalBytes: number, address: number, type?: ProgressType) {
+        this.bytesTransferred = bytesTransferred
+        this.totalBytes = totalBytes
+        this.address = address
+        this.type = type
+      }
+
+      setBytesTransferred(bytesTransferred: number): this {
+        this.bytesTransferred = bytesTransferred
+        return this
+      }
+
+      setTotalBytes(totalBytes: number): this {
+        this.totalBytes = totalBytes
+        return this
+      }
+
+      setAddress(address: number): this {
+        this.address = address
+        return this
+      }
+
+      setType(type: ProgressType): this {
+        this.type = type
+        return this
+      }
+    }
+    export enum ProgressType {
+      MEMORY_READ = "Reading memory",
+      MEMORY_READ_UBOOT = "Reading uboot from memory",
+      MEMORY_READ_FES1 = "Reading fes1 from memory",
+      MEMORY_READ_BOOT_IMAGE = "Reading boot image from memory",
+      MEMORY_WRITE = "Writing memory",
+      MEMORY_WRITE_UBOOT = "Writing uboot to memory",
+      MEMORY_WRITE_FES1 = "Writing fes1 to memory",
+      MEMORY_WRITE_BOOT_IMAGE = "Writing boot image to memory",
+      NAND_READ = "Reading NAND",
+      NAND_READ_UBOOT = "Reading uboot from NAND",
+      NAND_READ_BOOT_IMAGE = "Reading boot image from NAND",
+      NAND_WRITE = "Writing NAND",
+      NAND_WRITE_UBOOT = "Writing uboot to NAND",
+      NAND_WRITE_BOOT_IMAGE = "Writing boot image to NAND"
+    }
+    export enum ReadingWriting {
+      READ,
+      WRITE
+    }
+    export namespace ProgressType {
+      export function getMemoryType(address: number, operation: ReadingWriting) {
+        switch (true) {
+          case (address == FelConstants.FES1_BASE_M):
+            return (operation == ReadingWriting.READ ? ProgressType.MEMORY_READ_FES1 : ProgressType.MEMORY_WRITE_FES1)
+          
+          case (address >= FelConstants.UBOOT_BASE_M && address <= FelConstants.UBOOT_BASE_M + FelConstants.UBOOT_MAX_SIZE_F):
+            return (operation == ReadingWriting.READ ? ProgressType.MEMORY_READ_UBOOT : ProgressType.MEMORY_WRITE_UBOOT)
+          
+          default:
+            return (operation == ReadingWriting.READ ? ProgressType.MEMORY_READ : ProgressType.MEMORY_WRITE)
+        }
+      }
+
+      export function getNandType(address: number, operation: ReadingWriting): ProgressType {
+        switch (true) {
+          case (address >= FelConstants.UBOOT_BASE_F && address <= FelConstants.UBOOT_BASE_F + FelConstants.UBOOT_MAX_SIZE_F):
+            return (operation == ReadingWriting.READ ? ProgressType.NAND_READ_UBOOT : ProgressType.NAND_WRITE_UBOOT)
+          
+          case (address >= FelConstants.BOOT_IMAGE_BASE_F && address <= FelConstants.BOOT_IMAGE_BASE_F + FelConstants.BOOT_IMAGE_MAX_SIZE):
+            return (operation == ReadingWriting.READ ? ProgressType.NAND_READ_BOOT_IMAGE : ProgressType.NAND_WRITE_BOOT_IMAGE)
+          
+          default:
+          return (operation == ReadingWriting.READ ? ProgressType.NAND_READ : ProgressType.NAND_WRITE)
+        }
       }
     }
   }

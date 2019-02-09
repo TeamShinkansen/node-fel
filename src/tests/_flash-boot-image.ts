@@ -12,8 +12,8 @@ async function run() {
     device.open()
     device.loadFes1(path.resolve(path.join(__dirname, "..", "..", "src", "tests", "fes1.bin")))
     device.loadUboot(path.resolve(path.join(__dirname, "..", "..", "src", "tests", "uboot.bin")))
-    var response = await FelHelpers.readUboot(device, console.log)
-    fs.writeFileSync(path.join(__dirname, "..", "..", "src", "tests", "ubootdump.bin"), response)
+    var bootimage = fs.readFileSync(path.join(__dirname, "..", "..", "src", "tests", "bootimagedump.bin"))
+    await FelHelpers.writeBootImage(device, bootimage, true, console.log)
   }
 }
 run().then(console.log).catch(function(error: Error) {

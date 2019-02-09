@@ -1,8 +1,9 @@
+/*.tgz
+/.gitignore
+/.gitattributes
+/.nojekyll
+/.vscode
+/dist/tests/
 /docs
 /src
 /tsconfig.json
-/.gitignore
-/*.tgz
-/.vscode
-/dist/tests/
-/.nojekyll
