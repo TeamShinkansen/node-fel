@@ -915,6 +915,9 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-constructor tsd-parent-kind-class">
 					<a href="_feldevice_.feldevice.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class">
+					<a href="_feldevice_.feldevice.html#isopen" class="tsd-kind-icon">is<wbr>Open</a>
+				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="_feldevice_.feldevice.html#close" class="tsd-kind-icon">close</a>
 				</li>
@@ -964,7 +967,7 @@ img { max-width: 100%; }
 					<a href="_feldevice_.feldevice.html#readfromusb" class="tsd-kind-icon">read<wbr>FromUSB</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
-					<a href="_feldevice_.feldevice.html#runubootcmd" class="tsd-kind-icon">run<wbr>Uboot<wbr>Cmd</a>
+					<a href="_feldevice_.feldevice.html#runubootcommand" class="tsd-kind-icon">run<wbr>Uboot<wbr>Command</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="_feldevice_.feldevice.html#setfes1bin" class="tsd-kind-icon">set<wbr>Fes1<wbr>Bin</a>
@@ -974,6 +977,9 @@ img { max-width: 100%; }
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="_feldevice_.feldevice.html#verifydevice" class="tsd-kind-icon">verify<wbr>Device</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-class">
+					<a href="_feldevice_.feldevice.html#writedeviceflash" class="tsd-kind-icon">write<wbr>Device<wbr>Flash</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class">
 					<a href="_feldevice_.feldevice.html#writedevicememory" class="tsd-kind-icon">write<wbr>Device<wbr>Memory</a>
@@ -1007,9 +1013,21 @@ img { max-width: 100%; }
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
+						<h3>Modules</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-module tsd-parent-kind-class"><a href="../modules/_feldevice_.feldevice.progresscallback.html" class="tsd-kind-icon">Progress<wbr>Callback</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
 						<h3>Constructors</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_feldevice_.feldevice.html#constructor" class="tsd-kind-icon">constructor</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
+						<h3>Properties</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-property tsd-parent-kind-class"><a href="_feldevice_.feldevice.html#isopen" class="tsd-kind-icon">is<wbr>Open</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
@@ -1031,10 +1049,11 @@ img { max-width: 100%; }
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_feldevice_.feldevice.html#readdeviceflash" class="tsd-kind-icon">read<wbr>Device<wbr>Flash</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_feldevice_.feldevice.html#readdevicememory" class="tsd-kind-icon">read<wbr>Device<wbr>Memory</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_feldevice_.feldevice.html#readfromusb" class="tsd-kind-icon">read<wbr>FromUSB</a></li>
-							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_feldevice_.feldevice.html#runubootcmd" class="tsd-kind-icon">run<wbr>Uboot<wbr>Cmd</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_feldevice_.feldevice.html#runubootcommand" class="tsd-kind-icon">run<wbr>Uboot<wbr>Command</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_feldevice_.feldevice.html#setfes1bin" class="tsd-kind-icon">set<wbr>Fes1<wbr>Bin</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_feldevice_.feldevice.html#setubootbin" class="tsd-kind-icon">set<wbr>Uboot<wbr>Bin</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_feldevice_.feldevice.html#verifydevice" class="tsd-kind-icon">verify<wbr>Device</a></li>
+							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_feldevice_.feldevice.html#writedeviceflash" class="tsd-kind-icon">write<wbr>Device<wbr>Flash</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_feldevice_.feldevice.html#writedevicememory" class="tsd-kind-icon">write<wbr>Device<wbr>Memory</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class"><a href="_feldevice_.feldevice.html#writetousb" class="tsd-kind-icon">write<wbr>ToUSB</a></li>
 						</ul>
@@ -1054,7 +1073,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L40">FelDevice.ts:40</a></li>
+								<li>Defined in FelDevice.ts:44</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1087,18 +1106,36 @@ img { max-width: 100%; }
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Properties</h2>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<a name="isopen" class="tsd-anchor"></a>
+				<h3>is<wbr>Open</h3>
+				<div class="tsd-signature tsd-kind-icon">is<wbr>Open<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in FelDevice.ts:44</li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>If the device is open</p>
+					</div>
+				</div>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 				<a name="close" class="tsd-anchor"></a>
 				<h3>close</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">close<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">close<span class="tsd-signature-symbol">(</span>force<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L74">FelDevice.ts:74</a></li>
+								<li>Defined in FelDevice.ts:82</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1106,6 +1143,12 @@ img { max-width: 100%; }
 								<p>Closes the FEL device</p>
 							</div>
 						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> force: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></h5>
+							</li>
+						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
@@ -1120,7 +1163,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L415">FelDevice.ts:415</a></li>
+								<li>Defined in FelDevice.ts:466</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1151,7 +1194,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L156">FelDevice.ts:156</a></li>
+								<li>Defined in FelDevice.ts:166</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1183,7 +1226,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L179">FelDevice.ts:179</a></li>
+								<li>Defined in FelDevice.ts:189</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1226,7 +1269,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L137">FelDevice.ts:137</a></li>
+								<li>Defined in FelDevice.ts:147</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1256,7 +1299,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L429">FelDevice.ts:429</a></li>
+								<li>Defined in FelDevice.ts:480</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1279,7 +1322,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L445">FelDevice.ts:445</a></li>
+								<li>Defined in FelDevice.ts:496</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1302,7 +1345,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L195">FelDevice.ts:195</a></li>
+								<li>Defined in FelDevice.ts:205</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1325,7 +1368,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L110">FelDevice.ts:110</a></li>
+								<li>Defined in FelDevice.ts:120</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -1342,7 +1385,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L106">FelDevice.ts:106</a></li>
+								<li>Defined in FelDevice.ts:116</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -1359,7 +1402,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L97">FelDevice.ts:97</a></li>
+								<li>Defined in FelDevice.ts:107</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1389,7 +1432,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L84">FelDevice.ts:84</a></li>
+								<li>Defined in FelDevice.ts:94</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1413,13 +1456,13 @@ img { max-width: 100%; }
 				<a name="open" class="tsd-anchor"></a>
 				<h3>open</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">open<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">open<span class="tsd-signature-symbol">(</span>force<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L59">FelDevice.ts:59</a></li>
+								<li>Defined in FelDevice.ts:63</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1427,6 +1470,12 @@ img { max-width: 100%; }
 								<p>Opens the FEL device. When you are finished communicating with the device, you should call the close() method.</p>
 							</div>
 						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5><span class="tsd-flag ts-flagDefault value">Default value</span> force: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></h5>
+							</li>
+						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
@@ -1435,18 +1484,18 @@ img { max-width: 100%; }
 				<a name="readdeviceflash" class="tsd-anchor"></a>
 				<h3>read<wbr>Device<wbr>Flash</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">read<wbr>Device<wbr>Flash<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, length<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, progressCallback<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">read<wbr>Device<wbr>Flash<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, length<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, progressCallback<span class="tsd-signature-symbol">?: </span><a href="../modules/_feldevice_.feldevice.progresscallback.html" class="tsd-signature-type">ProgressCallback</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L322">FelDevice.ts:322</a></li>
+								<li>Defined in FelDevice.ts:368</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Reads the device NAND memory</p>
+								<p>Reads froms the device NAND</p>
 							</div>
 						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1460,7 +1509,7 @@ img { max-width: 100%; }
 								</div>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> progressCallback: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> progressCallback: <a href="../modules/_feldevice_.feldevice.progresscallback.html" class="tsd-signature-type">ProgressCallback</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1471,13 +1520,13 @@ img { max-width: 100%; }
 				<a name="readdevicememory" class="tsd-anchor"></a>
 				<h3>read<wbr>Device<wbr>Memory</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">read<wbr>Device<wbr>Memory<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, length<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, progressCallback<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">read<wbr>Device<wbr>Memory<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, length<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, progressCallback<span class="tsd-signature-symbol">?: </span><a href="../modules/_feldevice_.feldevice.progresscallback.html" class="tsd-signature-type">ProgressCallback</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L282">FelDevice.ts:282</a></li>
+								<li>Defined in FelDevice.ts:292</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1500,7 +1549,7 @@ img { max-width: 100%; }
 								</div>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> progressCallback: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> progressCallback: <a href="../modules/_feldevice_.feldevice.progresscallback.html" class="tsd-signature-type">ProgressCallback</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1518,7 +1567,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L127">FelDevice.ts:127</a></li>
+								<li>Defined in FelDevice.ts:137</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1540,16 +1589,16 @@ img { max-width: 100%; }
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="runubootcmd" class="tsd-anchor"></a>
-				<h3>run<wbr>Uboot<wbr>Cmd</h3>
+				<a name="runubootcommand" class="tsd-anchor"></a>
+				<h3>run<wbr>Uboot<wbr>Command</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">run<wbr>Uboot<wbr>Cmd<span class="tsd-signature-symbol">(</span>command<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, noReturn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, progressCallback<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">run<wbr>Uboot<wbr>Command<span class="tsd-signature-symbol">(</span>command<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, noReturn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, progressCallback<span class="tsd-signature-symbol">?: </span><a href="../modules/_feldevice_.feldevice.progresscallback.html" class="tsd-signature-type">ProgressCallback</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L354">FelDevice.ts:354</a></li>
+								<li>Defined in FelDevice.ts:405</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1572,7 +1621,7 @@ img { max-width: 100%; }
 								</div>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> progressCallback: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> progressCallback: <a href="../modules/_feldevice_.feldevice.progresscallback.html" class="tsd-signature-type">ProgressCallback</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1589,7 +1638,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L437">FelDevice.ts:437</a></li>
+								<li>Defined in FelDevice.ts:488</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1620,7 +1669,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L453">FelDevice.ts:453</a></li>
+								<li>Defined in FelDevice.ts:504</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1651,7 +1700,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L223">FelDevice.ts:223</a></li>
+								<li>Defined in FelDevice.ts:233</li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_awverifydeviceresponse_.awverifydeviceresponse.html" class="tsd-signature-type">AwVerifyDeviceResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1659,16 +1708,50 @@ img { max-width: 100%; }
 				</ul>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-				<a name="writedevicememory" class="tsd-anchor"></a>
-				<h3>write<wbr>Device<wbr>Memory</h3>
+				<a name="writedeviceflash" class="tsd-anchor"></a>
+				<h3>write<wbr>Device<wbr>Flash</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">write<wbr>Device<wbr>Memory<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, buffer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span>, progressCallback<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">write<wbr>Device<wbr>Flash<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, buffer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span>, progressCallback<span class="tsd-signature-symbol">?: </span><a href="../modules/_feldevice_.feldevice.progresscallback.html" class="tsd-signature-type">ProgressCallback</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L242">FelDevice.ts:242</a></li>
+								<li>Defined in FelDevice.ts:330</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Writes to the device NAND</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>address: <span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li>
+								<h5>buffer: <span class="tsd-signature-type">Buffer</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> progressCallback: <a href="../modules/_feldevice_.feldevice.progresscallback.html" class="tsd-signature-type">ProgressCallback</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+				<a name="writedevicememory" class="tsd-anchor"></a>
+				<h3>write<wbr>Device<wbr>Memory</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon">write<wbr>Device<wbr>Memory<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, buffer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span>, progressCallback<span class="tsd-signature-symbol">?: </span><a href="../modules/_feldevice_.feldevice.progresscallback.html" class="tsd-signature-type">ProgressCallback</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in FelDevice.ts:252</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1691,7 +1774,7 @@ img { max-width: 100%; }
 								</div>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> progressCallback: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">function</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> progressCallback: <a href="../modules/_feldevice_.feldevice.progresscallback.html" class="tsd-signature-type">ProgressCallback</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -1708,7 +1791,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/TeamShinkansen/node-fel/blob/a4d743b/src/FelDevice.ts#L118">FelDevice.ts:118</a></li>
+								<li>Defined in FelDevice.ts:128</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
