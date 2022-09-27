@@ -16,7 +16,7 @@
   "author": "Daniel Radtke",
   "license": "GPL-3.0",
   "devDependencies": {
-    "del-cli": "^1.1.0",
+    "del-cli": "^5.0.0",
     "tslint": "^5.12.1",
     "typedoc": "^0.14.2",
     "typescript": "^3.3.3"
